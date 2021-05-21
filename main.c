@@ -12,13 +12,21 @@
 
 
 void main(void){
-    int32_t value;
+    int32_t value,acum;
+    float weight;
     initApp();
     uartConfig();
     hx711Init();
     while(1){
-        value=hx711Read();
-        printf("%ld\r\n",value);  
+        acum=0;
+        for(uint8_t i=0;i<20;i++){
+            value=hx711Read();
+            acum+=value;
+            __delay_ms(100);
+        }
+        acum/=20;
+        weight=M*acum+B;
+        printf("%.2f\r\n",weight);  
         __delay_ms(500);
                 
     }
