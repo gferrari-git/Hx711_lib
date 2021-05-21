@@ -36,6 +36,9 @@
 #define PD_CLK PORTCbits.RC2
 #define TRIS_PD_CLK TRISCbits.TRISC2
 
+#define M   (0.0023365f)
+#define B   (-130.142654f)
+
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <stdint.h>
 
