@@ -41,6 +41,10 @@ void uartWriteByte( uint8_t value );        /* Envia un byte en forma boqueante 
 uint8_t uartReadByte( uint8_t* receivedByte );  /* Toma un byte de la UART */
 tick_t tickRead( void );        /* Lee Tick Counter */
 void tickWrite( tick_t ticks ); /* Escribe Tick Counter */
+void my_ftoa(float* fvalue, char* farray, uint8_t decs);
+char* itoa(int value, char* result, int basen);
+void swap(char *x, char *y);
+char* reverse(char *buffer, int i, int j);
 
 /*==================[fin del archivo]========================================*/
 #endif// USER_H
