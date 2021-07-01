@@ -14,6 +14,7 @@
 void main(void){
     int32_t value,acum;
     float weight;
+    char peso[6];
     initApp();
     uartConfig();
     hx711Init();
@@ -26,7 +27,9 @@ void main(void){
         }
         acum/=20;
         weight=M*acum+B;
-        printf("%.2f\r\n",weight);  
+        my_ftoa(&weight,peso,2);// esta funcion convierte el float weight en
+                                //un string peso con 2 decimales
+        printf("%s\r\n",peso);  
         __delay_ms(500);
                 
     }
