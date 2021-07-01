@@ -207,13 +207,92 @@ void tickWrite( tick_t ticks ) {
     GIE = 1;                        //Finaliza la zona critica
 }
 
+void my_ftoa(float* fvalue, char* farray, uint8_t decs){
+    int ent;
+    char i;
+    uint8_t auxc;
+	float aux;
 
+	ent = (int) (*fvalue);
+	itoa(ent,farray,10);
+	aux = *fvalue - (float)ent;
+	if(aux<0.0f){
+		aux = -aux;
+	}
+	i=0;
+	while(farray[i]!='\0'){
+		i++;
+	}
+	farray[i]='.';
+	i++;
+	for(;decs>0;decs--){
+	auxc=
+	aux=aux*10;
+	auxc= (uint8_t)aux;
+	aux =aux-(float)auxc;
+	farray[i]=auxc+'0';
+	i++;
+	}
+	farray[i]='\0';
+}
 
-// Reset prueba
-//void Reset(){
-//    if(PIN_RESET == 0){
-//        ValPWM_Der = 0;
-//        ValPWM_Izq = 0;
-//    }        
-//}
+// Function to swap two numbers
+void swap(char *x, char *y) {
+    char t = *x; *x = *y; *y = t;
+}
+ 
+// Function to reverse `buffer[i…j]`
+char* reverse(char *buffer, int i, int j)
+{
+    while (i < j) {
+        swap(&buffer[i++], &buffer[j--]);
+    }
+ 
+    return buffer;
+}
+ 
+// Iterative function to implement `itoa()` function in C
+char* itoa(int value, char* buffer, int basen)
+{
+    // invalid input
+    if (basen < 2 || basen > 32) {
+        return buffer;
+    }
+    int n;
+    // consider the absolute value of the number
+    if(value<0) n=value*-1;
+    else        n=value;
+ 
+    int i = 0;
+    while (n)
+    {
+        int r = n % basen;
+ 
+        if (r >= 10) {
+            buffer[i++] = 65 + (r - 10);
+        }
+        else {
+            buffer[i++] = 48 + r;
+        }
+ 
+        n = n / basen;
+    }
+ 
+    // if the number is 0
+    if (i == 0) {
+        buffer[i++] = '0';
+    }
+ 
+    // If the basen is 10 and the value is negative, the resulting string
+    // is preceded with a minus sign (-)
+    // With any other basen, value is always considered unsigned
+    if (value < 0 && basen == 10) {
+        buffer[i++] = '-';
+    }
+ 
+    buffer[i] = '\0'; // null terminate string
+ 
+    // reverse the string and return it
+    return reverse(buffer, 0, i - 1);
+}
 /*==================[fin del archivo]========================================*/
